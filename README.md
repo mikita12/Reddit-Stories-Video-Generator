@@ -49,10 +49,12 @@ nano raw/story_002.txt
 ## 2) Generate narration audio (`out.wav`)
 
 Use OpenAI TTS via `generate_audio.py`.
+Make sure your OpenAI API key is available in environment variables (`OPENAI_API_KEY`) before running the command.
 
 ```bash
 cd /home/mikita/Pulpit/yt
 source whisper_env/bin/activate
+export OPENAI_API_KEY="your_api_key_here"
 python generate_audio.py --input raw/story_002.txt --output out.wav
 deactivate
 ```
