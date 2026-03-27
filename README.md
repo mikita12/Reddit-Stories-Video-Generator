@@ -2,6 +2,31 @@
 
 This README contains the full command sequence to create a new video in this workspace.
 
+## Required background assets
+
+Before running the pipeline, make sure these files exist in the project root:
+
+- `scary_minecraft_bg.mp4` — background gameplay/video layer
+- `bg_sound.wav` — background ambient/music layer
+
+They are required by `build_video.py` and are used only as background video/audio for the final short.
+
+## Install Whisper / WhisperX
+
+You need FFmpeg and a Python virtual environment with WhisperX installed.
+
+```bash
+cd /home/mikita/Pulpit/yt
+python3 -m venv whisperx-env
+source whisperx-env/bin/activate
+pip install -U pip
+pip install openai-whisper
+pip install whisperx
+deactivate
+```
+
+If `whisperx` command is not found later, activate the same environment before running transcription.
+
 ## 0) Go to project folder
 
 ```bash
@@ -38,7 +63,7 @@ Use the Python 3.10 WhisperX environment:
 
 ```bash
 cd /home/mikita/Pulpit/yt
-source whisperx-env310/bin/activate
+source whisperx-env/bin/activate
 whisperx out.wav --model large-v3 --language en --align_model WAV2VEC2_ASR_LARGE_LV60K_960H --output_dir . --output_format json
 deactivate
 ```
@@ -83,7 +108,7 @@ cd /home/mikita/Pulpit/yt && \
 source whisper_env/bin/activate && \
 python generate_audio.py --input raw/story_002.txt --output out.wav && \
 deactivate && \
-source whisperx-env310/bin/activate && \
+source whisperx-env/bin/activate && \
 whisperx out.wav --model large-v3 --language en --align_model WAV2VEC2_ASR_LARGE_LV60K_960H --output_dir . --output_format json && \
 deactivate && \
 python build_video.py
@@ -92,7 +117,7 @@ python build_video.py
 If WhisperX model/alignment names differ on your machine, run:
 
 ```bash
-source whisperx-env310/bin/activate
+source whisperx-env/bin/activate
 whisperx --help
 deactivate
 ```
